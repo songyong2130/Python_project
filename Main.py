@@ -70,7 +70,7 @@ def quest_clear(player):
         num += 1
     separation()
     try : 
-        clear_input = int(input('클리어할 퀘스트를 입력하세요.'))
+        clear_input = int(input('클리어할 퀘스트를 입력하세요. (0 입력시 취소)'))
         if clear_input == 0:
             return
         if 1 <= clear_input <= len(running_list):
@@ -88,7 +88,8 @@ def Player_Quest(player) :
         separation()
         try:
             quest_input = int(input("진행할 퀘스트를 입력하세요. (0 입력시 돌아가기)>> "))
-
+            if quest_input == 0:
+                return
             if 1 <= quest_input <= len(available_quests):
                 selected_quest = available_quests[quest_input - 1]
                 player.accept_quest(selected_quest)
@@ -136,11 +137,11 @@ while True:
         elif player_input == 3:
             quest_clear(player)
         elif player_input == 4:
-            print(4)
+            player.inventory.show_inventory() 
         elif player_input == 5:
-            print(5)
+            print("미니보스 도전 기능은 아직 준비 중입니다.")
         elif player_input == 0:
-            print(0)
+            print("로그아웃 되었습니다.")
             break
         else : 
             print('잘못된 입력')
