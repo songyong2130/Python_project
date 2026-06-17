@@ -5,13 +5,17 @@ from Inventory import Inventory
 class Player :
     def __init__(self,name):
         self.name = name
-        self.level = 1
+        self.level = 20
         self.exp = 0
         self.grade = 1
         self.title = '[1학년 신입생]'
         self.inventory = Inventory(self.grade) # 
         self.running = {}
         self.ended = []
+# ------- 배틀 ---------
+        self.maxHp =  100 + (self.level * 20)
+        self.hp = self.maxHp
+        self.atk = 10 + (self.level * 2)
 
     def gain_exp(self,amount) :
         self.exp += amount
@@ -34,7 +38,7 @@ class Player :
         bonus_ratio = duration_min * 0.02
         final_exp = int(base_exp * (1 + bonus_ratio))
 
-        print(f'\n★ 퀘스트 클리어: {quest_name} ★')
+        print(f'\n 퀘스트 클리어: {quest_name} ')
         print(f'진행 시간: {duration_min}분')
         print(f'보상: 기본 {base_exp} exp + 시간 보너스 {int(base_exp * bonus_ratio)} exp = 총 {final_exp} exp')
 
@@ -68,9 +72,9 @@ class Player :
             print(f" 축하합니다! {self.name}님은 Lv.{self.level}에 도달하여")
             print("[졸업]하셨습니다! ")
             print('게임을 종료합니다.')
-            exit() 
+            exit()
 
-        # [레벨 40] 취업예정자 진급
+        # [레벨 40] 취업예정자
         elif self.level == 40:
             if self.grade != '취업예정자':
                 self.grade = '취업예정자'
@@ -79,7 +83,7 @@ class Player :
                 print(f"새로운 칭호 획득: {self.title}")
                 self.inventory.update_weapon(self.grade)
 
-        # [레벨 30 이상] 3학년 진급
+        # [레벨 30 이상] 3학년
         elif self.level >= 30:
             if self.grade != 3:
                 self.grade = 3
@@ -88,7 +92,7 @@ class Player :
                 print(f"새로운 칭호 획득: {self.title}")
                 self.inventory.update_weapon(self.grade)
                 
-        # [레벨 15 이상] 2학년 진급
+        # [레벨 15 이상] 2학년
         elif self.level >= 15:
             if self.grade != 2:
                 self.grade = 2

@@ -1,6 +1,7 @@
 from Quest import Quests
 from Player import Player
 from datetime import datetime
+from Inventory import Inventory
 #──────데이터──────
 
 #──────유틸───────
@@ -101,14 +102,14 @@ def Player_Quest(player) :
             continue
         if quest_input == 0:
             return
-print('[평범한 학생인 줄 알았던 내게 퀘스트 창이 보이기 시작했는데 졸업하기 위해선 최종보스를 잡아야하는 건에 대하여]')
+print('[평범한 소마고학생인 줄 알았던 내게 퀘스트 창이 보이기 시작했는데 졸업하기 위해선 최종보스를 잡아야하는 건에 대하여]')
 while True:
     Start_menu()
     Start_input = (input(' >> '))
     if Start_input == '1':
-        Name_input = input('이름을 입력하세요. (기본: 황금독수리온세상을놀라게하다) 취소하려면 0입력 >>')
+        Name_input = input('이름을 입력하세요. (Enter시 기본: 김철수) 취소하려면 0입력 >>')
         if Name_input == "":
-            player = Player('황금독수리온세상을놀라게하다')
+            player = Player('김철수')
         elif Name_input == "0":
             print('취소됨')
             continue
@@ -137,7 +138,7 @@ while True:
         elif player_input == 3:
             quest_clear(player)
         elif player_input == 4:
-            player.inventory.show_inventory() 
+            player.inventory.show_inventory()
         elif player_input == 5:
             print("미니보스 도전 기능은 아직 준비 중입니다.")
         elif player_input == 0:
