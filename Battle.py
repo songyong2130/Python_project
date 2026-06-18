@@ -1,23 +1,26 @@
+#모듈 불러오기
 from datetime import datetime
 from Boss import Bosses
 
+# 구분선 함수
 def separation():
     print("─" * 32)
-
+#미니보스 도전하는 함수
 def Challenge_MiniBoss(player):
     separation()
     print('         [미니 보스 도전]')
     
     boss_list = list(Bosses.keys())
     
-    for idx, name in enumerate(boss_list, 1):
+    num = 1
+    for name in(boss_list):
         info = Bosses[name]
         if name in player.defeated_bosses:
             status = "공략완료"
         else:
             status = f"공략가능 (권장Lv.{info['req_level']})"
-        print(f'[{idx}] {name} {status}')
-        
+        print(f'[{num}] {name} {status}')
+        num += 1
     separation()
     try:
         choice = int(input("도전할 보스 번호를 선택하세요 (0 입력시 뒤로가기) >> "))
@@ -30,12 +33,12 @@ def Challenge_MiniBoss(player):
         selected_boss_name = boss_list[choice - 1]
         boss_data = Bosses[selected_boss_name]
         
-        # 1. 영구 처치 완료 여부 검사
+        #영구 처치 완료 여부 검사
         if selected_boss_name in player.defeated_bosses:
-            print("❌ 이미 처치 완료된 일회성 보스입니다. 다시 싸울 수 없습니다.")
+            print("이미 처치 완료했습니다.")
             return
             
-        # 2. 10분(600초) 패배 쿨타임 검사
+        #10분(600초) 패배 패널티 검사
         now = datetime.now()
         if selected_boss_name in player.boss_timers:
             last_fail = player.boss_timers[selected_boss_name]
@@ -45,11 +48,12 @@ def Challenge_MiniBoss(player):
                 print(f"멘탈 회복중... 멘탈 회복 시간: {rem_sec // 60}분 {rem_sec % 60}초")
                 return
 
+        #Boss.py에서 지정한 데이터 넣음
         b_hp = boss_data['hp']
         b_dmg = boss_data['dmg']
         b_exp = boss_data['exp']
         
-        print(f"\n{selected_boss_name}과의 배틀!")
+        print(f"\n{selected_boss_name}와의 배틀!")
         print(f" 나의 무기: [{player.inventory.equipped_weapon}] (총 공격력: {player.total_dmg()})")
         print(f" 보스 스펙 -> HP: {b_hp} / 공격력: {b_dmg}")
         
@@ -58,7 +62,7 @@ def Challenge_MiniBoss(player):
             print("잠시 적을 외면합니다.")
             return
             
-        # 💡 턴제 루프
+        # 턴제 루프 시작
         turn = 1
         while player.hp > 0 and b_hp > 0:
             print(f"\n[TURN {turn}] ───────────────────────")
@@ -72,8 +76,8 @@ def Challenge_MiniBoss(player):
                 continue
                 
             if act == 2:
-                print("\n💨 긴급 도망에 성공했습니다! (도망 시 10분 제약이 걸리지 않습니다)")
-                player.hp = player.maxHp
+                print("\n 맛만보고 도망쳤습니다.(10분 제약 X)")
+                player.hp = player.maxHp #hp풀회복
                 return
                 
             if act == 1:
@@ -85,7 +89,7 @@ def Challenge_MiniBoss(player):
                 if b_hp <= 0:
                     break
                     
-                # 보스 반격
+                # 보스 공격
                 player.hp -= b_dmg
                 print(f"{selected_boss_name}의 공격! {b_dmg}의 대미지를 입음")
                 
@@ -99,3 +103,4 @@ def Challenge_MiniBoss(player):
 
     except ValueError:
         print("올바른 숫자를 작성해 주세요.")
+        return

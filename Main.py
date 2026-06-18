@@ -1,6 +1,7 @@
 from Player import Player
 from Battle import Challenge_MiniBoss
 import QuestManagement
+from Data_SaveAndLoad import save_file, Load_file
 
 #──────유틸───────
 def separation():
@@ -24,6 +25,7 @@ def Main_menu():
     ]
     for k,v in menus:
         print(f'        [{k}] {v}')
+#────── 메인 게임 안───────
 print('[평범한 소마고학생인 줄 알았던 내게 퀘스트 창이 보이기 시작했는데 졸업하기 위해선 최종보스를 잡아야하는 건에 대하여]')
 while True:
     Start_menu()
@@ -36,16 +38,21 @@ while True:
             print('취소됨')
             continue
         else:
-            player = Player(Name_input)
+            player = Player(Name_input) #새 겍체 생성
         print('새 게임을 시작합니다.')
         break
     elif Start_input == '2':
-        print('불러오기 할 내용이 없습니다.')
-        continue
+        Load_data = Load_file(Player)
+        if Load_data is not None:
+            player = Load_data
+            break
+        else:
+            continue
     elif Start_input == '3':
         print('게임을 종료합니다.')
         exit()
 while True:
+    save_file(player)
     try:
         separation()
         print('             [메인]')

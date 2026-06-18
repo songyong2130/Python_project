@@ -1,7 +1,9 @@
 from Quest import Quests
 from datetime import datetime
+#구분선 함수
 def separation():
     print("─" * 32)
+# 현재 가능한 퀘스트 목록 보여줌
 def Print_Quest(player):
     print('         [퀘스트 목록]')
     available_quests = []
@@ -14,6 +16,7 @@ def Print_Quest(player):
             num += 1
 
     return available_quests
+# 수락한 퀘스트 보여줌
 def show_accept_quest(player):
         separation()
         print('현재 진행중 퀘스트\n')
@@ -26,6 +29,7 @@ def show_accept_quest(player):
                 pass_time = int((now - start_time).total_seconds() / 60)
                 print(f'[{num}] {name} 상태 : 진행중 [시작 시간: {start_time.strftime('%H:%M:%S')}]')
                 num += 1
+#퀘스트 클리어 함수
 def quest_clear(player):
     separation()
     print('현재 진행중 퀘스트')
@@ -57,6 +61,7 @@ def quest_clear(player):
     except ValueError:
         print('숫자만 입력하세요.')
 #────────메인 기능─────────
+#플레이어 퀘스트 수락할수 있는 함수
 def Player_Quest(player) :
     while True:
         separation()
