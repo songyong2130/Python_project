@@ -21,6 +21,7 @@ def Main_menu():
         ('3','퀘스트 클리어'),
         ('4','인벤토리'),
         ('5','미니보스 도전'),
+        ('6','저장하기'),
         ('0','로그아웃')
     ]
     for k,v in menus:
@@ -53,6 +54,7 @@ while True:
         exit()
 while True:
     save_file(player)
+    print('자동 저장!')
     try:
         separation()
         print('             [메인]')
@@ -70,6 +72,9 @@ while True:
             player.inventory.show_inventory()
         elif player_input == 5:
             Challenge_MiniBoss(player)
+        elif player_input == 6:
+            save_file(player)
+            print('저장 완료! 데이터가 저장되었습니다.')
         elif player_input == 0:
             print("로그아웃 되었습니다.")
             break

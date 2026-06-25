@@ -1,4 +1,5 @@
 #모듈 불러오기
+import random
 from datetime import datetime
 from Boss import Bosses
 # 구분선 함수
@@ -52,9 +53,10 @@ def Challenge_MiniBoss(player):
         b_dmg = boss_data['dmg']
         b_exp = boss_data['exp']
         
+        boss_hitrate = boss_data['rate']
         print(f"\n{selected_boss_name}와의 배틀!")
         print(f" 나의 무기: [{player.inventory.equipped_weapon}] (총 공격력: {player.total_dmg()})")
-        print(f" 보스 스펙 -> HP: {b_hp} / 공격력: {b_dmg}")
+        print(f" 보스 스펙 -> HP: {b_hp} / 공격력: {b_dmg} / 적중률: {boss_hitrate}")
         
         battle_choice = int(input("정말 전투를 시작하겠습니까? (1:시작 / 0:도망) >> "))
         if battle_choice != 1:
@@ -80,18 +82,25 @@ def Challenge_MiniBoss(player):
                 return
                 
             if act == 1:
+                player_rate = 75
+                if random.randint(1,100) <= player_rate:
                 # 플레이어 선제 공격
-                p_atk = player.total_dmg()
-                b_hp -= p_atk
-                print(f" {player.name}의 공격! [{player.inventory.equipped_weapon}]로 {p_atk} 데미지를 입힘")
-                
+                    p_atk = player.total_dmg()
+                    b_hp -= p_atk
+                    print(f" [{player.name}]의 공격! [{player.inventory.equipped_weapon}]로 {p_atk} 데미지를 입힘")
+                    player_rate = 75 #플레이어 공격 적중시 확률 초기화
+                else :
+                    print(f'[{player.name}]의 공격 적중 실패...')
+                    player_rate += 5 #공격 적중 실패시 확률 5% 증가
                 if b_hp <= 0:
                     break
                     
                 # 보스 공격
-                player.hp -= b_dmg
-                print(f"{selected_boss_name}의 공격! {b_dmg}의 대미지를 입음")
-                
+                if random.randint(1,100) <= boss_hitrate:
+                    player.hp -= b_dmg
+                    print(f"[{selected_boss_name}]의 공격! {b_dmg}의 대미지를 입음")
+                else:
+                    print(f'[{selected_boss_name}]의 공격이 빗나감!')
                 turn += 1
                 
         # 결과 처리
