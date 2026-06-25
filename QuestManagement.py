@@ -14,7 +14,6 @@ def Print_Quest(player):
             print(f'[{num}] {name}    exp:{info["exp"]}')
             available_quests.append(name)
             num += 1
-
     return available_quests
 # 수락한 퀘스트 보여줌
 def show_accept_quest(player):

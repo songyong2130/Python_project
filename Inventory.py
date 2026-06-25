@@ -40,8 +40,8 @@ class Inventory:
             
             print(f"\n---------------------------------------")
             print(f" 장비 변경 및 인벤토리 이동")
-            print(f" [기존 장비 해제] -> [{old_weapon}]이(가) 가방으로 들어갔습니다.")
-            print(f" [신규 장비 착용] -> [{self.equipped_weapon}]을(를) 장착했습니다.")
+            print(f" [장비 해제] -> [{old_weapon}]이(가) 가방으로 들어갔습니다.")
+            print(f" [장비 착용] -> [{self.equipped_weapon}]을(를) 장착했습니다.")
             print(f"---------------------------------------\n")
     #인벤토리(4번)을 누르면 나오는 현재 나의 인벤토리 정보들을 출력
     def show_inventory(self):

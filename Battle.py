@@ -1,7 +1,6 @@
 #모듈 불러오기
 from datetime import datetime
 from Boss import Bosses
-
 # 구분선 함수
 def separation():
     print("─" * 32)
