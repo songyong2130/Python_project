@@ -9,7 +9,7 @@ class Player :
         self.exp = 0
         self.grade = 1
         self.title = '[1학년 신입생]'
-        self.inventory = Inventory(self.grade) # 
+        self.inventory = Inventory(self.grade)
         self.running = {}
         self.ended = []
 # ------- 배틀 ---------
@@ -93,8 +93,8 @@ class Player :
     #레벨업 및 여러 각종 스탯들 실시간으로 오르는거 잡아주는거 여기서 학년과 칭호가 바뀜
     def Level_up(self):
         self.level += 1
-        self.maxHp = 100 + (self.level * 50)
-        self.atk = 10 + (self.level * 4)
+        self.maxHp = 100 + (self.level * 60)
+        self.atk = 10 + (self.level * 8)
         self.hp = self.maxHp
         print(f' 레벨 업! \n 현재 레벨: Lv.{self.level} \n 현재 공격력: {self.atk} \n 현재 최대HP : {self.maxHp}')
 

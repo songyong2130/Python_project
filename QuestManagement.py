@@ -63,6 +63,10 @@ def quest_clear(player):
 #플레이어 퀘스트 수락할수 있는 함수
 def Player_Quest(player) :
     while True:
+        #Player에 running에 퀘스트가 2개 이상이면 반환
+        if len(player.running) >= 2:
+                print('퀘스트는 2개 이상 받을 수 없습니다.')    
+                return
         separation()
         available_quests = Print_Quest(player)
         separation()
